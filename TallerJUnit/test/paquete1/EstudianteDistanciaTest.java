@@ -53,6 +53,7 @@ public class EstudianteDistanciaTest {
         ArrayList<Nota> ns2 = new ArrayList<>();
 
         instance.establecerNotas(ns);
+        instance.establecerNotas(ns2);
 
         Field field = instance.getClass().getDeclaredField("notas");
         field.setAccessible(true);
@@ -64,7 +65,11 @@ public class EstudianteDistanciaTest {
 
     /**
      * Test of obtenerNotas method, of class EstudianteDistancia.
+     *
+     * @throws java.lang.NoSuchFieldException
+     * @throws java.lang.IllegalAccessException
      */
+    /*
     @Test
     public void testObtenerNotas() {
         System.out.println("obtenerNotas");
@@ -73,8 +78,7 @@ public class EstudianteDistanciaTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
-    
+     */
     @Test
     public void testEstablecerMejorNota() throws
             IllegalArgumentException,
@@ -90,7 +94,7 @@ public class EstudianteDistanciaTest {
         Field field = instance.getClass().getDeclaredField("mejorNota");
         field.setAccessible(true);
         assertEquals(10.0, field.get(instance));
-        
+
     }
 
     /**
@@ -107,16 +111,15 @@ public class EstudianteDistanciaTest {
         instance.establecerNotas(ns);
         instance.establecerMejorNota();
         double result = instance.obtenerMejorNota();
-        
+
         assertEquals(expResult, result, 0.0);
     }
 
-    
     @Test
     public void testEstablecerPeorNota() throws
             IllegalArgumentException,
             NoSuchFieldException,
-            IllegalAccessException  {
+            IllegalAccessException {
         System.out.println("establecerPeorNota");
         ArrayList<Nota> ns = new ArrayList<>();
         ns.add(new Nota(10.0));
@@ -141,18 +144,17 @@ public class EstudianteDistanciaTest {
         ns.add(new Nota(6.0));
         double expResult = 5.0;
         instance.establecerNotas(ns);
-        instance.establecerMejorNota();
+        instance.establecerPeorNota();
         double result = instance.obtenerPeorNota();
-        
+
         assertEquals(expResult, result, 0.0);
     }
 
-    
     @Test
     public void testEstablecerPromedio() throws
             IllegalArgumentException,
             NoSuchFieldException,
-            IllegalAccessException  {
+            IllegalAccessException {
         System.out.println("establecerPromedio");
         ArrayList<Nota> ns = new ArrayList<>();
         ns.add(new Nota(10.0));
@@ -162,14 +164,14 @@ public class EstudianteDistanciaTest {
         instance.establecerPromedio();
         Field field = instance.getClass().getDeclaredField("promedio");
         field.setAccessible(true);
-        assertEquals( 7.0, field.get(instance));
+        assertEquals(7.0, field.get(instance));
     }
 
     /**
      * Test of obtenerMejorPromedio method, of class EstudianteDistancia.
      */
     @Test
-    public void testObtenerMejorPromedio() {
+    public void testObtenerPromedio() {
         System.out.println("obtenerMejorPromedio");
         ArrayList<Nota> ns = new ArrayList<>();
         ns.add(new Nota(10.0));
@@ -177,9 +179,9 @@ public class EstudianteDistanciaTest {
         ns.add(new Nota(6.0));
         double expResult = 7.0;
         instance.establecerNotas(ns);
-        instance.establecerMejorNota();
-        double result = instance.obtenerMejorPromedio();
-        
+        instance.establecerPromedio();
+        double result = instance.obtenerPromedio();
+
         assertEquals(expResult, result, 0.0);
     }
 
@@ -189,12 +191,12 @@ public class EstudianteDistanciaTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        
+
         ArrayList<Nota> ns = new ArrayList<>();
         ns.add(new Nota(10.0));
         ns.add(new Nota(5.0));
         ns.add(new Nota(6.0));
-        
+
         instance.establecerNotas(ns);
         instance.establecerMejorNota();
         instance.establecerPeorNota();
@@ -202,19 +204,19 @@ public class EstudianteDistanciaTest {
         instance.establecerNombresEstudiante("Andrea");
         instance.establecerApellidoEstudiante("Vela");
         instance.establecerIdentificacionEstudiante("98981234");
-        
+
         String expResult = "Nombre Estudiante: Andrea Vela\n"
                 + "Cédula: 98981234"
                 + "Notas: \n"
-                + "10.0"
-                + "5.0"
-                + "6.0"
-                + "Proemdio: 7.0"
-                + "Mejor Nota: 10.0"
-                + "Peor Nota: 5.0";
+                + "10,0"
+                + "5,0"
+                + "6,0"
+                + "Promedio: 7,0"
+                + "Mejor Nota: 10,0"
+                + "Peor Nota: 5,0";
         String result = instance.toString();
         assertEquals(expResult, result);
-        
+
     }
 
 }
